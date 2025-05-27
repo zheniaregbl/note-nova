@@ -3,6 +3,7 @@ package ru.syndicate.notenova
 import android.app.Application
 import cafe.adriel.voyager.core.registry.ScreenRegistry
 import ru.syndicate.notenova.feature.folder.navigation.featureFolderScreenModule
+import ru.syndicate.notenova.feature.home.navigation.featureHomeScreenModule
 
 class NoteApplication : Application() {
 
@@ -10,6 +11,7 @@ class NoteApplication : Application() {
         super.onCreate()
 
         ScreenRegistry {
+            featureHomeScreenModule()
             featureFolderScreenModule()
         }
     }

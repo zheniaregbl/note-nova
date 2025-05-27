@@ -42,7 +42,7 @@ import ru.syndicate.notenova.feature.home.resources.Res
 import ru.syndicate.notenova.feature.home.resources.search_svg
 import ru.syndicate.notenova.feature.home.resources.settings_svg
 
-class HomeScreen : Screen {
+internal class HomeScreen : Screen {
 
     @Composable
     override fun Content() {

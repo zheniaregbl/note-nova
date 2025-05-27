@@ -12,17 +12,17 @@ import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.transitions.FadeTransition
 import ru.syndicate.notenova.core.presentation.theme.AppTheme
 import ru.syndicate.notenova.core.presentation.theme.colorPalette
-import ru.syndicate.notenova.feature.home.presentation.HomeScreen
+import ru.syndicate.notenova.feature.splash.presentation.SplashScreen
 
 @Composable
-fun App() {
+internal fun App() {
     AppTheme {
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .background(MaterialTheme.colorPalette.backgroundColor)
         ) {
-            Navigator(HomeScreen()) { navigator ->
+            Navigator(SplashScreen()) { navigator ->
                 FadeTransition(
                     navigator = navigator,
                     animationSpec = tween(
