@@ -55,7 +55,7 @@ internal class HomeScreen : Screen {
                 .fillMaxSize()
                 .statusBarsPadding()
                 .padding(top = 8.dp)
-                .padding(horizontal = 20.dp),
+                .padding(horizontal = 8.dp),
             onNavigateToFolder = { navigator.push(folderScreen) }
         )
     }
@@ -106,7 +106,9 @@ internal fun HomeScreenContent(
         Box(modifier = Modifier.fillMaxSize()) {
 
             LazyColumn(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 12.dp),
                 verticalArrangement = Arrangement.spacedBy(20.dp)
             ) {
 
