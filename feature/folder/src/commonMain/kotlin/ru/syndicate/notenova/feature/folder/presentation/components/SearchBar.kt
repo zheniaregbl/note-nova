@@ -53,6 +53,7 @@ internal fun SearchBar(
             textStyle = LocalTextStyle.current.copy(
                 fontWeight = FontWeight.Medium,
                 fontSize = 16.sp,
+                lineHeight = 14.sp,
                 color = MaterialTheme.colorPalette.textColor
             ),
             value = value,
@@ -92,6 +93,7 @@ internal fun SearchBar(
                             style = LocalTextStyle.current,
                             fontWeight = FontWeight.Medium,
                             fontSize = 16.sp,
+                            lineHeight = 14.sp,
                             color = MaterialTheme.colorPalette.secondaryTextColor
                         )
                 }
