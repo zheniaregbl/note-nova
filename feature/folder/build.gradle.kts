@@ -20,7 +20,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "Core"
+            baseName = "Folder"
             isStatic = true
         }
     }
@@ -29,8 +29,12 @@ kotlin {
 
     sourceSets {
 
+        androidMain.dependencies {
+            implementation(libs.ui.tooling.preview)
+        }
         commonMain.dependencies {
             implementation(compose.components.resources)
+            implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
 
             implementation(compose.runtime)
@@ -38,13 +42,26 @@ kotlin {
             implementation(compose.material3)
             implementation(compose.ui)
 
+            implementation(libs.kotlinx.datetime)
+
             implementation(libs.voyager.navigator)
+            implementation(projects.core)
         }
     }
 }
 
+dependencies {
+    debugImplementation(libs.androidx.ui.tooling)
+}
+
+compose.resources {
+    publicResClass = false
+    packageOfResClass = "ru.syndicate.notenova.feature.folder.resources"
+    generateResClass = auto
+}
+
 android {
-    namespace = "ru.syndicate.notenova.core"
+    namespace = "ru.syndicate.notenova.feature.folder"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
@@ -64,7 +81,4 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-}
-dependencies {
-    implementation(libs.androidx.ui.graphics.android)
 }

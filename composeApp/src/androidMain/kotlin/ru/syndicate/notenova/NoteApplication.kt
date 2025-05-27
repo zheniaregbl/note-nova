@@ -1,13 +1,16 @@
 package ru.syndicate.notenova
 
-import androidx.compose.ui.window.ComposeUIViewController
+import android.app.Application
 import cafe.adriel.voyager.core.registry.ScreenRegistry
 import ru.syndicate.notenova.feature.folder.navigation.featureFolderScreenModule
 
-fun MainViewController() = ComposeUIViewController(
-    configure = {
+class NoteApplication : Application() {
+
+    override fun onCreate() {
+        super.onCreate()
+
         ScreenRegistry {
             featureFolderScreenModule()
         }
     }
-) { App() }
+}

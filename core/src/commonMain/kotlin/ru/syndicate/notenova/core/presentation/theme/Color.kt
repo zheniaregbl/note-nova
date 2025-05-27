@@ -12,3 +12,6 @@ internal val DarkBackgroundColor = Color(0xFF202123)
 internal val DarkTextColor = Color(0xFFEBEBEB)
 internal val DarkSecondaryTextColor = LightSecondaryTextColor
 internal val DarkCardColor = Color(0xFF2C2C2E)
+
+// Other app colors
+val BlueAccent = Color(0xFF026BCD)

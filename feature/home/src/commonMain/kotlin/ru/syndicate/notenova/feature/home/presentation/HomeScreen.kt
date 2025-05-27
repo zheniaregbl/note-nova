@@ -28,8 +28,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import org.jetbrains.compose.resources.painterResource
+import ru.syndicate.notenova.core.navigation.SharedScreen
 import ru.syndicate.notenova.core.presentation.theme.colorPalette
 import ru.syndicate.notenova.feature.home.domain.model.defaultFolders
 import ru.syndicate.notenova.feature.home.presentation.components.NoteFolderItem
@@ -43,19 +47,24 @@ class HomeScreen : Screen {
     @Composable
     override fun Content() {
 
+        val navigator = LocalNavigator.currentOrThrow
+        val folderScreen = rememberScreen(SharedScreen.FolderScreen)
+
         HomeScreenContent(
             modifier = Modifier
                 .fillMaxSize()
                 .statusBarsPadding()
                 .padding(top = 8.dp)
-                .padding(horizontal = 20.dp)
+                .padding(horizontal = 20.dp),
+            onNavigateToFolder = { navigator.push(folderScreen) }
         )
     }
 }
 
 @Composable
 internal fun HomeScreenContent(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onNavigateToFolder: () -> Unit = { }
 ) {
 
     Column(
@@ -113,7 +122,7 @@ internal fun HomeScreenContent(
                             NoteFolderItem(
                                 modifier = Modifier.fillMaxWidth(),
                                 noteFolder = noteFolder,
-                                onClick = { }
+                                onClick = onNavigateToFolder
                             )
                         }
                     }
