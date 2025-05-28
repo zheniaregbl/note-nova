@@ -52,6 +52,7 @@ kotlin {
             implementation(projects.feature.splash)
             implementation(projects.feature.home)
             implementation(projects.feature.folder)
+            implementation(projects.feature.note)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

@@ -49,6 +49,7 @@ internal class HomeScreen : Screen {
 
         val navigator = LocalNavigator.currentOrThrow
         val folderScreen = rememberScreen(SharedScreen.FolderScreen)
+        val noteScreen = rememberScreen(SharedScreen.NoteScreen)
 
         HomeScreenContent(
             modifier = Modifier
@@ -56,7 +57,8 @@ internal class HomeScreen : Screen {
                 .statusBarsPadding()
                 .padding(top = 8.dp)
                 .padding(horizontal = 8.dp),
-            onNavigateToFolder = { navigator.push(folderScreen) }
+            onNavigateToFolder = { navigator.push(folderScreen) },
+            onNavigateToNote = { navigator.push(noteScreen) }
         )
     }
 }
@@ -64,7 +66,8 @@ internal class HomeScreen : Screen {
 @Composable
 internal fun HomeScreenContent(
     modifier: Modifier = Modifier,
-    onNavigateToFolder: () -> Unit = { }
+    onNavigateToFolder: () -> Unit = { },
+    onNavigateToNote: () -> Unit = { }
 ) {
 
     Box(modifier = modifier) {
@@ -173,7 +176,7 @@ internal fun HomeScreenContent(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
                 .padding(end = 20.dp, bottom = 60.dp),
-            onClick = { }
+            onClick = onNavigateToNote
         )
     }
 }

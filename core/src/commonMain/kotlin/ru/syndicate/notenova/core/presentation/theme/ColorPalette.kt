@@ -16,6 +16,7 @@ data class ColorPalette(
     val textColor: Color,
     val secondaryTextColor: Color,
     val cardColor: Color,
+    val hintColor: Color,
     val themeMode: ThemeMode
 )
 
@@ -23,6 +24,7 @@ val LightColorPalette = ColorPalette(
     backgroundColor = LightBackgroundColor,
     textColor = LightTextColor,
     secondaryTextColor = LightSecondaryTextColor,
+    hintColor = LightHintColor,
     cardColor = Color.White,
     themeMode = ThemeMode.LIGHT
 )
@@ -31,6 +33,7 @@ val DarkColorPalette = ColorPalette(
     backgroundColor = DarkBackgroundColor,
     textColor = DarkTextColor,
     secondaryTextColor = DarkSecondaryTextColor,
+    hintColor = DarkHintColor,
     cardColor = DarkCardColor,
     themeMode = ThemeMode.DARK
 )
