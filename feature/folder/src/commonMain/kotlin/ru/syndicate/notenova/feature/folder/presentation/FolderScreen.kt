@@ -6,11 +6,10 @@ import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -40,6 +39,7 @@ import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import org.jetbrains.compose.resources.painterResource
+import ru.syndicate.notenova.core.presentation.components.AddButton
 import ru.syndicate.notenova.core.presentation.theme.colorPalette
 import ru.syndicate.notenova.feature.folder.domain.model.Folder
 import ru.syndicate.notenova.feature.folder.domain.model.Note
@@ -75,106 +75,113 @@ internal fun FolderScreenContent(
 
     var searchText by remember { mutableStateOf("") }
 
-    Column(
-        modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(10.dp)
-    ) {
+    Box(modifier = modifier) {
 
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalAlignment = Alignment.CenterVertically
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
 
-            IconButton(onClick = onBack) {
-                Image(
-                    modifier = Modifier.size(28.dp),
-                    painter = painterResource(Res.drawable.arrow_back_svg),
-                    contentDescription = null,
-                    colorFilter = ColorFilter.tint(MaterialTheme.colorPalette.secondaryTextColor)
-                )
-            }
-
-            Text(
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxWidth()
-                    .basicMarquee(),
-                text = "Very very very very very very long name for folder",
-                style = LocalTextStyle.current,
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp,
-                textAlign = TextAlign.Start,
-                maxLines = 1,
-                color = MaterialTheme.colorPalette.textColor
-            )
-
-            IconButton(onClick = { }) {
-                Image(
-                    modifier = Modifier.size(28.dp),
-                    painter = painterResource(Res.drawable.option_svg),
-                    contentDescription = null,
-                    colorFilter = ColorFilter.tint(MaterialTheme.colorPalette.secondaryTextColor)
-                )
-            }
-        }
-
-        SearchBar(
-            modifier = Modifier
-                .padding(horizontal = 12.dp)
-                .fillMaxWidth(),
-            value = searchText,
-            hintText = "Search",
-            onValueChange = { searchText = it }
-        )
-
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 12.dp)
-        ) {
-
-            LazyColumn(
+            Row(
                 modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
 
-                item { Spacer(Modifier.height(2.dp)) }
-
-                items(12) {
-
-                    val note = Note(
-                        id = 0,
-                        title = "Some note",
-                        content = "Very very very very very very very long content for this note.",
-                        folder = Folder(
-                            id = 0,
-                            title = "Work"
-                        ),
-                        lastUpdateDate = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
-                    )
-
-                    NoteCard(
-                        modifier = Modifier.fillMaxWidth(),
-                        note = note,
-                        showFolderChip = true,
-                        onClick = { }
+                IconButton(onClick = onBack) {
+                    Image(
+                        modifier = Modifier.size(28.dp),
+                        painter = painterResource(Res.drawable.arrow_back_svg),
+                        contentDescription = null,
+                        colorFilter = ColorFilter.tint(MaterialTheme.colorPalette.secondaryTextColor)
                     )
                 }
 
-                item { Spacer(Modifier.height(50.dp)) }
+                Text(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxWidth()
+                        .basicMarquee(),
+                    text = "Very very very very very very long name for folder",
+                    style = LocalTextStyle.current,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    textAlign = TextAlign.Start,
+                    maxLines = 1,
+                    color = MaterialTheme.colorPalette.textColor
+                )
+
+                IconButton(onClick = { }) {
+                    Image(
+                        modifier = Modifier.size(28.dp),
+                        painter = painterResource(Res.drawable.option_svg),
+                        contentDescription = null,
+                        colorFilter = ColorFilter.tint(MaterialTheme.colorPalette.secondaryTextColor)
+                    )
+                }
             }
+
+            SearchBar(
+                modifier = Modifier
+                    .padding(horizontal = 8.dp)
+                    .fillMaxWidth(),
+                value = searchText,
+                hintText = "Search",
+                onValueChange = { searchText = it }
+            )
 
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(
-                        Brush.verticalGradient(
-                            0.0f to MaterialTheme.colorPalette.backgroundColor,
-                            0.02f to Color.Transparent
+                    .padding(horizontal = 8.dp)
+            ) {
+
+                LazyColumn(
+                    modifier = Modifier.fillMaxWidth(),
+                    contentPadding = PaddingValues(top = 12.dp, bottom = 50.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+
+                    items(12) {
+
+                        val note = Note(
+                            id = 0,
+                            title = "Some note",
+                            content = "Very very very very very very very long content for this note.",
+                            folder = Folder(
+                                id = 0,
+                                title = "Work"
+                            ),
+                            lastUpdateDate = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
                         )
-                    )
-            )
+
+                        NoteCard(
+                            modifier = Modifier.fillMaxWidth(),
+                            note = note,
+                            showFolderChip = true,
+                            onClick = { }
+                        )
+                    }
+                }
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(
+                            Brush.verticalGradient(
+                                0.0f to MaterialTheme.colorPalette.backgroundColor,
+                                0.02f to Color.Transparent
+                            )
+                        )
+                )
+            }
         }
+
+        AddButton(
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(end = 20.dp, bottom = 60.dp),
+            onClick = { }
+        )
     }
 }

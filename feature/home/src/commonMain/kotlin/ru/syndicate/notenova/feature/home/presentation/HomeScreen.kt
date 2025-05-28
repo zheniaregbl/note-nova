@@ -5,11 +5,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -34,6 +33,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import org.jetbrains.compose.resources.painterResource
 import ru.syndicate.notenova.core.navigation.SharedScreen
+import ru.syndicate.notenova.core.presentation.components.AddButton
 import ru.syndicate.notenova.core.presentation.theme.colorPalette
 import ru.syndicate.notenova.feature.home.domain.model.defaultFolders
 import ru.syndicate.notenova.feature.home.presentation.components.NoteFolderItem
@@ -67,105 +67,113 @@ internal fun HomeScreenContent(
     onNavigateToFolder: () -> Unit = { }
 ) {
 
-    Column(
-        modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(6.dp)
-    ) {
+    Box(modifier = modifier) {
 
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(6.dp)
         ) {
 
-            IconButton(onClick = { }) {
-                Image(
-                    modifier = Modifier.size(28.dp),
-                    painter = painterResource(Res.drawable.settings_svg),
-                    contentDescription = null
-                )
-            }
-
-            Text(
-                text = "Library",
-                style = LocalTextStyle.current,
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp,
-                color = MaterialTheme.colorPalette.textColor
-            )
-
-            IconButton(onClick = { }) {
-                Image(
-                    modifier = Modifier.size(28.dp),
-                    painter = painterResource(Res.drawable.search_svg),
-                    contentDescription = null
-                )
-            }
-        }
-
-        Box(modifier = Modifier.fillMaxSize()) {
-
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 12.dp),
-                verticalArrangement = Arrangement.spacedBy(20.dp)
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
 
-                item {
-                    Column(
-                        modifier = Modifier
-                            .padding(top = 16.dp)
-                            .fillMaxWidth()
-                            .clip(RoundedCornerShape(10.dp))
-                            .background(MaterialTheme.colorPalette.cardColor)
-                    ) {
-                        defaultFolders.forEach { noteFolder ->
-                            NoteFolderItem(
-                                modifier = Modifier.fillMaxWidth(),
-                                noteFolder = noteFolder,
-                                onClick = onNavigateToFolder
-                            )
-                        }
-                    }
+                IconButton(onClick = { }) {
+                    Image(
+                        modifier = Modifier.size(28.dp),
+                        painter = painterResource(Res.drawable.settings_svg),
+                        contentDescription = null
+                    )
                 }
 
-                item {
+                Text(
+                    text = "Library",
+                    style = LocalTextStyle.current,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    color = MaterialTheme.colorPalette.textColor
+                )
 
-                    Column(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalArrangement = Arrangement.spacedBy(10.dp)
-                    ) {
+                IconButton(onClick = { }) {
+                    Image(
+                        modifier = Modifier.size(28.dp),
+                        painter = painterResource(Res.drawable.search_svg),
+                        contentDescription = null
+                    )
+                }
+            }
 
-                        SectionHeader(
-                            modifier = Modifier.fillMaxWidth(),
-                            title = "Folders"
-                        )
+            Box(modifier = Modifier.fillMaxSize()) {
 
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 8.dp),
+                    contentPadding = PaddingValues(top = 16.dp, bottom = 140.dp),
+                    verticalArrangement = Arrangement.spacedBy(20.dp)
+                ) {
+
+                    item {
                         Column(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .clip(RoundedCornerShape(10.dp))
                                 .background(MaterialTheme.colorPalette.cardColor)
                         ) {
+                            defaultFolders.forEach { noteFolder ->
+                                NoteFolderItem(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    noteFolder = noteFolder,
+                                    onClick = onNavigateToFolder
+                                )
+                            }
+                        }
+                    }
 
+                    item {
+
+                        Column(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalArrangement = Arrangement.spacedBy(10.dp)
+                        ) {
+
+                            SectionHeader(
+                                modifier = Modifier.fillMaxWidth(),
+                                title = "Folders"
+                            )
+
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clip(RoundedCornerShape(10.dp))
+                                    .background(MaterialTheme.colorPalette.cardColor)
+                            ) {
+
+                            }
                         }
                     }
                 }
 
-                item { Spacer(Modifier.height(50.dp)) }
-            }
-
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(
-                        Brush.verticalGradient(
-                            0.0f to MaterialTheme.colorPalette.backgroundColor,
-                            0.02f to Color.Transparent
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(
+                            Brush.verticalGradient(
+                                0.0f to MaterialTheme.colorPalette.backgroundColor,
+                                0.02f to Color.Transparent
+                            )
                         )
-                    )
-            )
+                )
+            }
         }
+
+        AddButton(
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(end = 20.dp, bottom = 60.dp),
+            onClick = { }
+        )
     }
 }
